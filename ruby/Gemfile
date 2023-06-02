@@ -9,3 +9,5 @@ gem "rspec", "~> 3.12"
 gem "rails", "~> 7.0"
 
 gem "sqlite3", "~> 1.6"
+
+gem "solargraph", "~> 0.49.0"
