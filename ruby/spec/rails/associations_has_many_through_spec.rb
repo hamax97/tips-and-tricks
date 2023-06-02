@@ -4,13 +4,15 @@ require "logger"
 ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")
 ActiveRecord::Base.logger = Logger.new(STDOUT, level: Logger::ERROR)
 
-RSpec.describe "ActiveRecord has_many :through" do
-  context "many-to-many relationship" do
+#
+# has_many :through
+# 1. Can be used to model many-to-many relationships.
+# 2. Can be used to "shortcut" through nested has_many associations.
+#
 
-    #
-    # has_many :through
-    # Can be used to model many-to-many relationships.
-    #
+RSpec.describe "ActiveRecord has_many :through" do
+
+  context "many-to-many relationship" do
 
     before :context do
       ActiveRecord::Schema.define do
@@ -65,13 +67,10 @@ RSpec.describe "ActiveRecord has_many :through" do
     it "should allow a patient to access his physicians" do
       expect(patient.physicians).to_not be_empty
     end
+
   end
 
   context "shortcut through nested has_many" do
-
-    #
-    # has_many :through
-    # Can be used to "shortcut" through nested has_many associations.
 
     before :context do
       ActiveRecord::Schema.define do
@@ -115,5 +114,6 @@ RSpec.describe "ActiveRecord has_many :through" do
 
       expect(doc.paragraphs.to_a).to contain_exactly(p1sec1, p2sec1, p1sec2, p2sec2)
     end
+
   end
 end
